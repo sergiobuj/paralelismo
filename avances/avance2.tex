@@ -1,0 +1,171 @@
+%======================================================================
+%----------------------------------------------------------------------
+%sergiobuj's ieee format template
+%======================================================================
+\documentclass[%
+	%draft,
+	%submission,
+	%compressed,
+	final,
+	%
+	%technote,
+	%internal,
+	%submitted,
+	%inpress,
+	%reprint,
+	%
+	%titlepage,
+	notitlepage,
+	%anonymous,
+	narroweqnarray,
+	inline,
+	twoside,
+         %invited,
+	]{ieee}
+
+\newcommand{\latexiie}{\LaTeX2{\Large$_\varepsilon$}}
+
+%Español
+	\usepackage[utf8]{inputenc}
+	\usepackage[spanish]{babel}
+%loñapsE
+
+%\usepackage{ieeetsp}	% if you want the "trans. sig. pro." style
+%\usepackage{ieeetc}	% if you want the "trans. comp." style
+%\usepackage{ieeeimtc}	% if you want the IMTC conference style
+
+% Use the `endfloat' package to move figures and tables to the end
+% of the paper. Useful for `submission' mode.
+%\usepackage {endfloat}
+
+% Use the `times' package to use Helvetica and Times-Roman fonts
+% instead of the standard Computer Modern fonts. Useful for the 
+% IEEE Computer Society transactions.
+%\usepackage{times}
+% (Note: If you have the commercial package `mathtime,' (from 
+% y&y (http://www.yandy.com), it is much better, but the `times' 
+% package works too). So, if you have it...
+%\usepackage {mathtime}
+
+% for any plug-in code... insert it here. For example, the CDC style...
+%\usepackage{ieeecdc}
+
+\begin{document}
+
+%----------------------------------------------------------------------
+% Title Information, Abstract and Keywords
+%----------------------------------------------------------------------
+\title[Avance  práctica 2]{%
+       Avance 2 práctica 2 \\  Organización de Computadores}
+
+% format author this way for journal articles.
+% MAKE SURE THERE ARE NO SPACES BEFORE A \member OR \authorinfo
+% COMMAND (this also means `don't break the line before these
+% commands).
+\author[]{Sebastián Arcila Valenzuela (\textit{sarcilav@eafit.edu.co})
+\and{}y Sergio Botero Uribe (\textit{sbotero2@eafit.edu.co}).
+}
+
+% format author this way for conference proceedings
+%\author[PLETT AND KOLL\'{A}R]{%
+        %Gregory L. Plett\member{Student Member},\authorinfo{%
+        %Department of Electrical Engineering,\\ 
+        %Stanford University, Stanford, CA 94305-9510.\\
+        %Phone: $+$1\,650\,723-4769, email: glp@simoon.stanford.edu}%
+%\and{}and%
+%\and{}Istv\'{a}n Koll\'{a}r\member{Fellow}\authorinfo{%
+        %Department of Measurement and Instrument Engineering,\\ 
+        %Technical University of Budapest, 1521 Budapest, Hungary.\\
+        %Phone: $+$\,36\,1\,463-1774, fax: +\,36\,1\,463-4112, 
+        %email: kollar@mmt.bme.hu}
+%}
+
+\journal{ST0254-031 Organización de Computadores}
+\titletext{, \today} 
+%\ieeecopyright{0018--9456/97\$10.00 \copyright\ 1997 IEEE}
+%\lognumber{xxxxxxx}
+%\pubitemident{S 0018--9456(97)09426--6}
+%\loginfo{Manuscript received September 27, 1997.}
+%\firstpage{0}
+
+%\confplacedate{Ottawa, Canada, May 19--21, 1997}
+
+\maketitle               
+
+\begin{abstract} 
+Avance número 2 de la práctica 2, sobre paralelismo.
+\end{abstract}
+
+\begin{keywords}
+Práctica 2, organización de computadores, paralelismo, Logisim y procesador, ALU, CUDA, sumas parciales.
+\end{keywords}
+
+%----------------------------------------------------------------------
+% SECTION I: Introduction
+%----------------------------------------------------------------------
+\section{Comentarios}
+\begin{itemize}
+\PARstart para esta entrega dos, hemos estado contemplando las diferentes
+posibilidades para intentar hacer el código de instrucción, sumar
+vector, en un orden inferior $O(n)$, aunque por obvias razones tenemos
+que visitar cada elemento del vector al menos una vez tenemos que
+empezar a analizar que pasa cuando visitamos varios de ellos en
+simultaneo.
+
+\item segmentación:
+Podríamos usar segmentación e ir haciendo sumas parciales, donde por
+sumas parciales nos referimos en sumar a la vez varias parejas de
+elementos, pero siempre tendríamos  el problema que es que a la
+siguiente iteración necesitamos valores que todavía se podrían
+encontrar en la línea de producción, entonces sería un elemento
+obligatorio a revisar el como esto afecta la complejidad del
+algoritmo, porque si fuera simplemente ir haciendo bisección y sumando
+tendríamos una complejidad de $O(n/16) = O(n)$.
+
+\item Varias ALU.
+Es reutilizar la misma idea que usan las tarjetas graficadoras
+modernas, y es el uso de varias ALU a la vez, y está idea si que le ha
+dado fruto a las graficadoras, pues en computación se utiliza mucho
+las operaciones sobre vectores numéricos, como es el caso de los
+Shaders (Lenguaje Cg para NVIdia) y de otras tecnologías como CUDA
+también de NVidia, en donde lo importante es garantizar la
+independencia entre las operaciones atómicas.
+
+\item Varias unidades de control con varias ALU.
+La idea sería similar, solo que el en realidad si se podrían hacer las
+sumas en el mismo instante y teóricamente cada suma que empiece en
+simultaneo con otra debería terminar al mismo tiempo que las demás,
+asumiendo que no van a existir fallos de cache. Por lo que el orden
+sería $O(log_k n)$ donde $k =$ numero de unidades de control por numero de
+ALU por cada unidad de control.
+\end{itemize}
+%----------------------------------------------------------------------
+% SECTION II: Estructura de la práctica
+%----------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------
+% SECTION III: Dificultades
+%----------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------
+\section{Tareas por realizar}
+Lista de las actividades que faltan para terminar la práctica y
+que además serían interesantes realizar:
+\begin{itemize}
+\item Decidir el juego señales
+\item Montar el juego de señales
+\item Procesador.
+\end{itemize}
+
+%----------------------------------------------------
+
+
+%\begin{thebibliography}{1}
+
+%\end{thebibliography}
+
+%----------------------------------------------------------------------
+
+\end{document}
