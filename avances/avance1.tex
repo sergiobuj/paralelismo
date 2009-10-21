@@ -1,0 +1,158 @@
+%======================================================================
+%----------------------------------------------------------------------
+%sergiobuj's ieee format template
+%======================================================================
+\documentclass[%
+	%draft,
+	%submission,
+	%compressed,
+	final,
+	%
+	%technote,
+	%internal,
+	%submitted,
+	%inpress,
+	%reprint,
+	%
+	%titlepage,
+	notitlepage,
+	%anonymous,
+	narroweqnarray,
+	inline,
+	twoside,
+         %invited,
+	]{ieee}
+
+\newcommand{\latexiie}{\LaTeX2{\Large$_\varepsilon$}}
+
+%Español
+	\usepackage[utf8]{inputenc}
+	\usepackage[spanish]{babel}
+%loñapsE
+
+%\usepackage{ieeetsp}	% if you want the "trans. sig. pro." style
+%\usepackage{ieeetc}	% if you want the "trans. comp." style
+%\usepackage{ieeeimtc}	% if you want the IMTC conference style
+
+% Use the `endfloat' package to move figures and tables to the end
+% of the paper. Useful for `submission' mode.
+%\usepackage {endfloat}
+
+% Use the `times' package to use Helvetica and Times-Roman fonts
+% instead of the standard Computer Modern fonts. Useful for the 
+% IEEE Computer Society transactions.
+%\usepackage{times}
+% (Note: If you have the commercial package `mathtime,' (from 
+% y&y (http://www.yandy.com), it is much better, but the `times' 
+% package works too). So, if you have it...
+%\usepackage {mathtime}
+
+% for any plug-in code... insert it here. For example, the CDC style...
+%\usepackage{ieeecdc}
+
+\begin{document}
+
+%----------------------------------------------------------------------
+% Title Information, Abstract and Keywords
+%----------------------------------------------------------------------
+\title[Avance práctica 2]{%
+       Avance práctica 2 \\  Organización de Computadores}
+
+% format author this way for journal articles.
+% MAKE SURE THERE ARE NO SPACES BEFORE A \member OR \authorinfo
+% COMMAND (this also means `don't break the line before these
+% commands).
+\author[]{Sebastián Arcila Valenzuela (\textit{sarcilav@eafit.edu.co})
+\and{}y Sergio Botero Uribe (\textit{sbotero2@eafit.edu.co}).
+}
+
+% format author this way for conference proceedings
+%\author[PLETT AND KOLL\'{A}R]{%
+        %Gregory L. Plett\member{Student Member},\authorinfo{%
+        %Department of Electrical Engineering,\\ 
+        %Stanford University, Stanford, CA 94305-9510.\\
+        %Phone: $+$1\,650\,723-4769, email: glp@simoon.stanford.edu}%
+%\and{}and%
+%\and{}Istv\'{a}n Koll\'{a}r\member{Fellow}\authorinfo{%
+        %Department of Measurement and Instrument Engineering,\\ 
+        %Technical University of Budapest, 1521 Budapest, Hungary.\\
+        %Phone: $+$\,36\,1\,463-1774, fax: +\,36\,1\,463-4112, 
+        %email: kollar@mmt.bme.hu}
+%}
+
+\journal{ST0254-031 Organización de Computadores}
+\titletext{, \today} 
+%\ieeecopyright{0018--9456/97\$10.00 \copyright\ 1997 IEEE}
+%\lognumber{xxxxxxx}
+%\pubitemident{S 0018--9456(97)09426--6}
+%\loginfo{Manuscript received September 27, 1997.}
+%\firstpage{0}
+
+%\confplacedate{Ottawa, Canada, May 19--21, 1997}
+
+\maketitle               
+
+\begin{abstract} 
+Avance número 1 de la práctica 2, sobre paralelismo.
+\end{abstract}
+
+\begin{keywords}
+Práctica 2, organización de computadores, paralelismo, Logisim y procesador.
+\end{keywords}
+
+%----------------------------------------------------------------------
+% SECTION I: Introduction
+%----------------------------------------------------------------------
+\section{Comentarios}
+
+\PARstart Para este primer avance de la prácitca todavía no se tiene ninguna implementación para empezar
+a discutir sino más bien una serie de ideas que se espera se vayan desarrollando más fuertemente en el
+transcurso de la semana.\\
+Lo primero que se debe pensar para la práctica de paralelismo es que el objetivo queda en condicionar dos
+o más procesadores, aunque sería interesante revisar la idea de obtener el mismo desempeño simplemente
+modificando los componentes que necesitamos que hagan más trabajo, en este caso la unidad aritmética lógica,
+sin perder el horizonte de los procesadores.
+
+Una buena forma de mirar el objetivo de la práctica, sería comparando un vector de números enteros con una
+hoja de papel, y la idea es que se vaya doblando por la mitad hasta llegar al punto en que no se puede doblar más,
+que para el caso del vector sería la suma. Por estar doblando el vector a la mitad queremos decir que debe haber una
+unidad de procesamiento que se encargue de la mitad de ese vector y así sucesivamente hasta que al final una de ellas
+queda con el resultado final. Es un ejemplo sencillo para exponer la forma en que entendimos la práctica y
+como hasta este punto nos gustaría que funcionara.
+ 
+ Para el manejo del procesador, la aproximación más acertada sería poder hacerlo con microprogramación, en principio
+ con las instrucciones básicas y esperar poder ampliar el conjunto en la medida de lo posible.
+
+%----------------------------------------------------------------------
+% SECTION II: Estructura de la práctica
+%----------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------
+% SECTION III: Dificultades
+%----------------------------------------------------------------------
+
+
+%----------------------------------------------------------------------
+\section{Tareas por realizar}
+
+Lista de las actividades que faltan para terminar la práctica y
+que además serían interesantes realizar:
+\begin{itemize}
+\item Revisar métodos eficientes para realizar sumas de vectores.
+\item Investigar soluciones a nivel de algoritmos que ofrezcan buen desempeño.
+\item Procesador.
+\item Buscar métodos aplicados a vectores que se puedan mejorar mediante paralelismo (con al intención de ampliar la
+funcionalidad, pero no se promete nada).
+\end{itemize}
+
+%----------------------------------------------------
+
+
+%\begin{thebibliography}{1}
+
+%\end{thebibliography}
+
+%----------------------------------------------------------------------
+
+\end{document}
