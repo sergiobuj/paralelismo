@@ -1,0 +1,219 @@
+%======================================================================
+%----------------------------------------------------------------------
+%sergiobuj's ieee format template
+%======================================================================
+\documentclass[%
+	%draft,
+	%submission,
+	%compressed,
+	final,
+	%
+	%technote,
+	%internal,
+	%submitted,
+	%inpress,
+	%reprint,
+	%
+	%titlepage,
+	notitlepage,
+	%anonymous,
+	narroweqnarray,
+	inline,
+	twoside,
+         %invited,
+	]{ieee}
+
+\newcommand{\latexiie}{\LaTeX2{\Large$_\varepsilon$}}
+
+	
+
+%Español
+	\usepackage[utf8]{inputenc}
+	\usepackage[spanish]{babel}
+%loñapsE
+
+%\usepackage{ieeetsp}	% if you want the "trans. sig. pro." style
+%\usepackage{ieeetc}	% if you want the "trans. comp." style
+%\usepackage{ieeeimtc}	% if you want the IMTC conference style
+
+% Use the `endfloat' package to move figures and tables to the end
+% of the paper. Useful for `submission' mode.
+%\usepackage {endfloat}
+
+% Use the `times' package to use Helvetica and Times-Roman fonts
+% instead of the standard Computer Modern fonts. Useful for the 
+% IEEE Computer Society transactions.
+%\usepackage{times}
+% (Note: If you have the commercial package `mathtime,' (from 
+% y&y (http://www.yandy.com), it is much better, but the `times' 
+% package works too). So, if you have it...
+%\usepackage {mathtime}
+
+% for any plug-in code... insert it here. For example, the CDC style...
+%\usepackage{ieeecdc}
+
+\begin{document}
+
+%----------------------------------------------------------------------
+% Title Information, Abstract and Keywords
+%----------------------------------------------------------------------
+\title[Avance  práctica 2]{%
+       Avance 4 práctica 2 \\  Organización de Computadores}
+
+% format author this way for journal articles.
+% MAKE SURE THERE ARE NO SPACES BEFORE A \member OR \authorinfo
+% COMMAND (this also means `don't break the line before these
+% commands).
+\author[]{Sebastián Arcila Valenzuela (\textit{sarcilav@eafit.edu.co})
+\and{}y Sergio Botero Uribe (\textit{sbotero2@eafit.edu.co}).
+}
+
+% format author this way for conference proceedings
+%\author[PLETT AND KOLL\'{A}R]{%
+        %Gregory L. Plett\member{Student Member},\authorinfo{%
+        %Department of Electrical Engineering,\\ 
+        %Stanford University, Stanford, CA 94305-9510.\\
+        %Phone: $+$1\,650\,723-4769, email: glp@simoon.stanford.edu}%
+%\and{}and%
+%\and{}Istv\'{a}n Koll\'{a}r\member{Fellow}\authorinfo{%
+        %Department of Measurement and Instrument Engineering,\\ 
+        %Technical University of Budapest, 1521 Budapest, Hungary.\\
+        %Phone: $+$\,36\,1\,463-1774, fax: +\,36\,1\,463-4112, 
+        %email: kollar@mmt.bme.hu}
+%}
+
+\journal{ST0254-031 Organización de Computadores}
+\titletext{, \today} 
+%\ieeecopyright{0018--9456/97\$10.00 \copyright\ 1997 IEEE}
+%\lognumber{xxxxxxx}
+%\pubitemident{S 0018--9456(97)09426--6}
+%\loginfo{Manuscript received September 27, 1997.}
+%\firstpage{0}
+
+%\confplacedate{Ottawa, Canada, May 19--21, 1997}
+
+\maketitle               
+
+\begin{abstract} 
+Avance número 4 de la práctica 2, sobre paralelismo.
+\end{abstract}
+
+\begin{keywords}
+Práctica 2, organización de computadores, paralelismo, Logisim y procesador, ALU, sumas parciales.
+\end{keywords}
+
+\section{Avances}
+
+Para esta entrega parcial de la práctica se llegó a una conclusión para trabajar los formatos de instrucciones.
+El procesador va a trabajar con una memoria RAM de $128 bytes$ lo que nos lleva a trabajar con un tamaño
+dirección de $7 bits$.\\
+
+Por ahora sólo se llevan implementadas las operaciones fundamentales.
+
+La práctica se está llevando en el repositorio git en: http://github.com/sergiobuj/paralelismo .\\ \\
+
+
+
+\begin{itemize}
+
+
+
+\item Formato de instrucciones.
+
+
+\begin{table}[h]
+%\caption{MovM}
+\begin{center}
+\title{Tamaño de instrucciones: 14 bits.}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+13& 12& 11& 10& 9& 8& 7& 6& 5& 4& 3& 2& 1& 0\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+
+Los bits 13-11 serán para el código de operación en todas las instrucciones.\\
+\subitem $\triangleright$ Operaciones de transferencia.
+
+\begin{table}[h]
+%\caption{MovM}
+\begin{center}
+\title{MovM}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+13& 12& 11& 10& 9& 8& 7& 6& 5& 4& 3& 2& 1& 0\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+Los bits 10-8 serán usados para indicar el registro que estará involucrado en la
+transferencia, sea desde hacia memoria.\\
+El bit 7 indicará la dirección de esta transferencia, 1) desde registro a memoria y 0)
+de memoria a registro.\\
+Los bits 6-0 serán para la dirección de memoria.\\
+
+
+\begin{table}[h]
+%\caption{MovM}
+\begin{center}
+\title{MovR}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+13& 12& 11& 10& 9& 8& 7& 6& 5& x& x& x& x& x\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+Los bits 10-8 serán para el registro de origen y los bits 7-5 serán para el registro
+de destino, muy similar al formato de las instrucciones de AT\&T.\\
+
+
+%\end{itemize}
+
+
+
+\subitem $\triangleright$ Operaciones de aritméticas.
+
+\begin{table}[h]
+%\caption{MovM}
+\begin{center}
+\title{suma}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+13& 12& 11& 10& 9& 8& 7& 6& 5& x& x& x& x& x\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+Los bits 10-8 serán para el registro de origen y los bits 7-5 serán para el registro
+de destino, donde quedará almacenada la suma de los dos registros.\\
+
+
+\begin{table}[htpd]
+%\caption{MovM}
+\begin{center}
+\title{sumaV}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+13& 12& 11& 10& 9& 8& 7& 6& 5& 4& 3& 2& 1& x\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}%
+Los bits 10-8 serán para el registro donde se indica el tamaño del vector.\\
+Los bits 7-1 indican la posición en memoria del primer elemento del vector.
+Actúa de igual forma que un apuntador.
+
+
+\end{itemize}
+
+\section{Tareas por realizar}
+Lista de las actividades que faltan para terminar la práctica y
+que además serían interesantes realizar:
+\begin{itemize}
+\item Montar el juego de señales
+\item Procesador.
+\end{itemize}
+
+\end{document}
