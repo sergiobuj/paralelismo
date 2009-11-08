@@ -1,0 +1,61 @@
+
+\documentclass[%
+	%draft,
+	%submission,
+	%compressed,
+	final,
+	%
+	%technote,
+	%internal,
+	%submitted,
+	%inpress,
+	%reprint,
+	%
+	%titlepage,
+	notitlepage,
+	%anonymous,
+	narroweqnarray,
+	inline,
+	twoside,
+         %invited,
+	]{ieee}
+
+\newcommand{\latexiie}{\LaTeX2{\Large$_\varepsilon$}}
+\usepackage{url}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\begin{document}
+
+\title[Entrega final práctica 2]{%
+       Entrega final práctica 2 \\  Organización de Computadores}
+
+\author[]{Sebastián Arcila Valenzuela (\textit{sarcilav@eafit.edu.co}),
+\and{} Sergio Botero Uribe (\textit{sbotero2@eafit.edu.co}).
+}
+
+\journal{ST0254-031 Organización de Computadores}
+\titletext{, \today}
+
+\maketitle               
+
+\begin{abstract} 
+Entrega final de la práctica 2 de Organización de computadores, el informe contiene los detalles de la construcción del procesador así como las especificaciones de la solución planteada, las dificultades encontradas y los comentarios por cada uno de los integrantes del equipo sobre la práctica.
+\end{abstract}
+
+\section{docfinal/Introducción}
+	\input{docfinal/analisis_disenho}
+	\input{docfinal/especificaciones}
+\section{Dificultades encontradas durante la creación del procesador}
+	\input{docfinal/dificultades_sergio}
+	\input{docfinal/dificultades_sebastian} 
+\section{Opiniones sobre la práctica}
+	\input{docfinal/opinion_sergio}
+	\input{docfinal/opinion_sebastian}
+
+%\begin{thebibliography}{2}
+
+%\end{thebibliography}
+
+\end{document}
