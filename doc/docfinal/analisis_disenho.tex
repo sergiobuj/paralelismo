@@ -1,4 +1,29 @@
 \section{Detalles de diseño de construcción}
 
-La idea principal para lograr el paralelismo en la suma de los valores de un vector es sobrecargar la unidad
-aritmetico-lógica para que reciba más de dos valores a la vez y además se realimenta con el resultado anterior.
+Para esta práctica se tuvieron varias ideas principales, algunas de ellas se basaban en un procesador completamente
+diferente, otras tenían como idea principal el uso de un BUS más amplio, otras sólo pensaban sobrecargar una unidad
+aritmetico-lógica mientras que otras mucho más arriesgadas trataban de incorporar algo de todas.\\
+Algunas aproximaciones fueron:
+\begin{itemize}
+
+\item La primera aproximación fue la de crear una ALU que tuviera cuatro entradas y dos salidas de registro, esto llevaría
+a usar unos 8 registros para poder tener algunos para propósito general y evitar el hecho de que todo el procesador se
+viera involucrado en la operación de sumatoria de los valores del vector. Esta idea empezó a demostrar que era bastante
+complicada ya que el número de señales de la unidad de control se incrementaba para el manejo de las entradas y salidas
+de los registros. Hasta este momento no habíamos encontrado un error que después haría que se cambiara todo el
+procesador.
+
+\item Para atacar el problema de las señales de la unidad de control, se pensó en sobrecargar una ALU, hacer que la operación
+de suma de vector se manejara completamente allí, que se tuvieran un conjunto de registros exclusivos para esa operación y que
+las señales fueran totalmente independientes de la microprogramación. El error ahora sería que las señales de la unidad de control
+se interrumpirían con las que crearía la ALU. Hasta aquí todavía nos estabamos centrando en la ALU como el componente que
+haría la diferencia en el paralelismo.
+
+\item Del resto de las ideas y los diseños, la que parecía ser la que daría mejores resultados fue la de implementar una
+ALU con ciertos registros independiente de la normal que además sería controlada por una unidad de control independiente.
+Esta unidad de control debía ser activada por la unidad de control del procesador  y que luego esta le pasara el `control'
+nuevamente a la unidad del procesador.
+A este punto ya nos habíamos dado cuenta que los diseños anteriores no estaban atacando el problema para lograr
+paralelismo sino que sólo se estaban haciendo muchas sumas en un Tick de reloj, pero nada de paralelismo.
+
+\end{itemize}

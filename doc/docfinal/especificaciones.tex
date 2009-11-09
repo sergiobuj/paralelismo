@@ -1,1 +1,7 @@
-\section{Especificaciones del módulo }
+\section{Especificaciones del procesador}
+El procesador implementado tiene dos unidades de control, una que controla el procesador para operaciones normales y
+otra unidad de control que se encarga especificamente de la ALU sobrecargada, el cambio de control de las unidades
+se hace mediante las señales que salen de la instrucción de suma del vector.\\
+Una vez que la unidad de control del procesador pasa el control a su homólogo de la ALU, esta se encarga de traer los
+valores del vector de forma consecutiva para guardarlos en los registros de la ALU y cada vez que se traen 4 posiciones
+del vector se hace la suma de todos los valores, esto se hace en dos peticiones a la RAM.\\
